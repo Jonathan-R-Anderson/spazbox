@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  controller:
+    build: ./zksync-controller
+    volumes:
+      - shared:/shared
+    environment:
+      - CONTRACT_ADDRESS=0xYourContract
+      - WEBTORRENT_API=http://webtorrent:3000
+    depends_on:
+      - webtorrent
+
+  webtorrent:
+    build: ./webtorrent-downloader
+    volumes:
+      - shared:/shared
+
+volumes:
+  shared:
